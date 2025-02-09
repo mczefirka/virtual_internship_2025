@@ -1,0 +1,15 @@
+Task Name
+Give a name to your task
+
+
+Task Description
+Describe your task in free form. Try to make the description clear and detailed,
+so that the task can be performed not only by you.
+
+
+Importance/Priority of the task
+Define the importance of the task: Critical/Major/Minor.
+
+
+Estimated completion time
+Try to estimate how much time is needed to complete the task.
