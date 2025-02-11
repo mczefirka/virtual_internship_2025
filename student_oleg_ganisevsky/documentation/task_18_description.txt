@@ -1,0 +1,30 @@
+1)          **Task context (brief description) **
+**describe the context and the task in your own words in free form.**
+
+Write initialisation of agreementPrice field in different method
+
+
+2)          **What are done and how?(brief description)**
+**describe what you did and how you did it in order to accomplish the task.**
+
+I created the calculateAgreementPrice method and added initialization for the agreementPrice field.
+
+
+3)          **Why was it done? What did you learn from the task?**
+**describe in your own words why it was necessary to perform this task,describe what techniques,**
+**technologies, tools you used to perform the task, what did you learn while performing this task?**
+
+I refactored the code to use the new method to improve readability
+
+
+4)          **How much time was spent on the task?**
+**record for yourself how long it took you to complete this task. Could it have been done faster?**
+
+32 min
+
+
+5)          **Free-form notes, ideas, suggestions**
+**record any thoughts, emotions, ideas, reflections related to this task.**
+
+I decided to write initialization for the agreementPrice field in the TravelCalculatePremiumResponse class.
+I think it's better than initialization in the TravelCalculatePremiumServiceImpl.

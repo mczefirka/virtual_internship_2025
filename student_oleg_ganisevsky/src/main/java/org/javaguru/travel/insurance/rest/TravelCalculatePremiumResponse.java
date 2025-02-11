@@ -1,9 +1,9 @@
 package org.javaguru.travel.insurance.rest;
 
 import java.math.BigDecimal;
-import java.util.Date;
 import java.time.LocalDate;
 import java.time.ZoneId;
+import java.util.Date;
 
 public class TravelCalculatePremiumResponse {
 
@@ -21,12 +21,14 @@ public class TravelCalculatePremiumResponse {
         this.personLastName = personLastName;
         this.agreementDateFrom = agreementDateFrom;
         this.agreementDateTo = agreementDateTo;
+        this.agreementPrice = calculateAgreementPrice(agreementDateFrom, agreementDateTo);
+    }
 
-        // Calculate agreementPrice
+    private BigDecimal calculateAgreementPrice (Date agreementDateFrom, Date agreementDateTo){
         LocalDate localDate1 = agreementDateFrom.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
         LocalDate localDate2 = agreementDateTo.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
 
-        this.agreementPrice = new BigDecimal(java.time.temporal.ChronoUnit.DAYS.between(localDate1, localDate2));
+        return new BigDecimal(java.time.temporal.ChronoUnit.DAYS.between(localDate1, localDate2));
     }
 
     public String getPersonFirstName() {
