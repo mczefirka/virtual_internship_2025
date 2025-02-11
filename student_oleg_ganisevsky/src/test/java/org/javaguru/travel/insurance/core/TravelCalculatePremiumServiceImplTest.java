@@ -85,4 +85,13 @@ class TravelCalculatePremiumServiceImplTest {
         assertEquals(new BigDecimal("2"), response.getAgreementPrice());
     }
 
+    @Test
+    public void givenRequest_whenPopulateResponseAgreementDateInDateTimeServiceClass_thenReturnAgreementPrice() {
+        DateTimeService service = new DateTimeService();
+
+        // Check calculateAgreementPrice method from DateTimeService class
+        assertEquals(new BigDecimal("2"),
+                service.calculateAgreementPrice(new Date(new Date().getTime() - 2 * 86_400_000L), new Date()));
+    }
+
 }
