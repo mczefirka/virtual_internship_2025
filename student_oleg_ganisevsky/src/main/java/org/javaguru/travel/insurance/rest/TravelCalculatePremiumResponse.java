@@ -1,9 +1,9 @@
 package org.javaguru.travel.insurance.rest;
 
 import java.math.BigDecimal;
+import java.util.Date;
 import java.time.LocalDate;
 import java.time.ZoneId;
-import java.util.Date;
 
 public class TravelCalculatePremiumResponse {
 
