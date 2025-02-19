@@ -10,7 +10,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class TravelCalculatePremiumServiceImplAIOneTest {
 
-    private final TravelCalculatePremiumServiceImpl service = new TravelCalculatePremiumServiceImpl();
+    DateTimeService dateTimeService = new DateTimeService();
+    private final TravelCalculatePremiumServiceImpl service = new TravelCalculatePremiumServiceImpl(dateTimeService);
 
     @Test
     void testCalculatePremium_AllFields() {

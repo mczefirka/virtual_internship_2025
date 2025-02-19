@@ -1,0 +1,31 @@
+1)          **Task context (brief description) **
+**describe the context and the task in your own words in free form.**
+
+Add @Component annotation and constructor dependency injection to our program.
+Learn about Inversion of Control (IoC)
+
+
+2)          **What are done and how?(brief description)**
+**describe what you did and how you did it in order to accomplish the task.**
+
+I added @Component annotation to DateTimeService
+and added DateTimeService private final field to TravelCalculatePremiumServiceImpl.
+Also I edited my tests
+
+
+3)          **Why was it done? What did you learn from the task?**
+**describe in your own words why it was necessary to perform this task,describe what techniques,**
+**technologies, tools you used to perform the task, what did you learn while performing this task?**
+
+It helps our program run using multithreading
+
+
+4)          **How much time was spent on the task?**
+**record for yourself how long it took you to complete this task. Could it have been done faster?**
+
+49 min
+
+
+5)          **Free-form notes, ideas, suggestions**
+**record any thoughts, emotions, ideas, reflections related to this task.**
+

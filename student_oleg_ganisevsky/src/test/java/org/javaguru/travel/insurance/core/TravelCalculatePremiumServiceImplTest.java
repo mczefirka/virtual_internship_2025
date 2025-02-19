@@ -10,10 +10,12 @@ import java.util.Date;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class TravelCalculatePremiumServiceImplTest {
+
+    DateTimeService dateTimeService = new DateTimeService();
+    TravelCalculatePremiumServiceImpl calculatePremiumImpl = new TravelCalculatePremiumServiceImpl(dateTimeService);
+
     @Test
     public void givenRequest_whenPopulateResponsePersonFirstNameField_thenReturnResponse() {
-        TravelCalculatePremiumServiceImpl calculatePremiumImpl = new TravelCalculatePremiumServiceImpl();
-
         // Populate request fields
         TravelCalculatePremiumRequest request = new TravelCalculatePremiumRequest("Sigma",
                 "Male", new Date(), new Date());
@@ -27,8 +29,6 @@ class TravelCalculatePremiumServiceImplTest {
 
     @Test
     public void givenRequest_whenPopulateResponsePersonLastNameField_thenReturnResponse() {
-        TravelCalculatePremiumServiceImpl calculatePremiumImpl = new TravelCalculatePremiumServiceImpl();
-
         // Populate request fields
         TravelCalculatePremiumRequest request = new TravelCalculatePremiumRequest("Sigma",
                 "Male", new Date(), new Date());
@@ -42,8 +42,6 @@ class TravelCalculatePremiumServiceImplTest {
 
     @Test
     public void givenRequest_whenPopulateResponseAgreementDateFromField_thenReturnResponse() {
-        TravelCalculatePremiumServiceImpl calculatePremiumImpl = new TravelCalculatePremiumServiceImpl();
-
         // Populate request fields
         TravelCalculatePremiumRequest request = new TravelCalculatePremiumRequest("Sigma",
                 "Male", new Date(), new Date());
@@ -57,8 +55,6 @@ class TravelCalculatePremiumServiceImplTest {
 
     @Test
     public void givenRequest_whenPopulateResponseAgreementDateToField_thenReturnResponse() {
-        TravelCalculatePremiumServiceImpl calculatePremiumImpl = new TravelCalculatePremiumServiceImpl();
-
         // Populate request fields
         TravelCalculatePremiumRequest request = new TravelCalculatePremiumRequest("Sigma",
                 "Male", new Date(), new Date());
@@ -72,8 +68,6 @@ class TravelCalculatePremiumServiceImplTest {
 
     @Test
     public void givenRequest_whenPopulateResponseAgreementDateFromAndToFields_thenReturnAgreementPrice() {
-        TravelCalculatePremiumServiceImpl calculatePremiumImpl = new TravelCalculatePremiumServiceImpl();
-
         // Populate request fields. Create current date minus 2 days and current date
         TravelCalculatePremiumRequest request = new TravelCalculatePremiumRequest("Sigma",
                 "Male", new Date(new Date().getTime() - 2 * 86_400_000L), new Date());
@@ -87,11 +81,9 @@ class TravelCalculatePremiumServiceImplTest {
 
     @Test
     public void givenRequest_whenPopulateResponseAgreementDateInDateTimeServiceClass_thenReturnAgreementPrice() {
-        DateTimeService service = new DateTimeService();
-
         // Check calculateAgreementPrice method from DateTimeService class
         assertEquals(new BigDecimal("2"),
-                service.calculateAgreementPrice(new Date(new Date().getTime() - 2 * 86_400_000L), new Date()));
+                dateTimeService.calculateAgreementPrice(new Date(new Date().getTime() - 2 * 86_400_000L), new Date()));
     }
 
 }

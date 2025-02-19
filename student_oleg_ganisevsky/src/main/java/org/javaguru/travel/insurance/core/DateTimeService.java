@@ -1,10 +1,13 @@
 package org.javaguru.travel.insurance.core;
 
+import org.springframework.stereotype.Component;
+
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.Date;
 
+@Component
 public class DateTimeService {
     public BigDecimal calculateAgreementPrice (Date agreementDateFrom, Date agreementDateTo){
         LocalDate localDate1 = agreementDateFrom.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
