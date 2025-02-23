@@ -1,0 +1,34 @@
+1)          **Task context (brief description) **
+**describe the context and the task in your own words in free form.**
+
+Ваша задача заменить в тесте TravelCalculatePremiumServiceImplTest
+создание инстанции объекта DateTimeService на создание мок объекта,
+задать ему нужное поведение для успешного выполнения теста.
+
+
+2)          **What are done and how?(brief description)**
+**describe what you did and how you did it in order to accomplish the task.**
+
+Чтобы внедрить Mockito в тест я переписал TravelCalculatePremiumServiceImpl и TravelCalculatePremiumResponse.
+Теперь dateTimeService.calculateAgreementPrice вызывается в …ServiceImpl, а не в …Response как раньше.
+
+Я считал что лучше пусть объект сам вызовет calculateAgreementPrice,
+но сейчас понял что у нас же есть Service класс. Он как раз и должен делать сервис операции.
+
+
+3)          **Why was it done? What did you learn from the task?**
+**describe in your own words why it was necessary to perform this task,describe what techniques,**
+**technologies, tools you used to perform the task, what did you learn while performing this task?**
+
+Благодаря Mockito мы можем тестировать наш код изолировав его от зависимостей.
+
+
+4)          **How much time was spent on the task?**
+**record for yourself how long it took you to complete this task. Could it have been done faster?**
+
+3 ч 53 мин
+
+
+5)          **Free-form notes, ideas, suggestions**
+**record any thoughts, emotions, ideas, reflections related to this task.**
+

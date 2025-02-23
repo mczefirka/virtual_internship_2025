@@ -1,7 +1,5 @@
 package org.javaguru.travel.insurance.rest;
 
-import org.javaguru.travel.insurance.core.DateTimeService;
-
 import java.math.BigDecimal;
 import java.util.Date;
 
@@ -12,17 +10,15 @@ public class TravelCalculatePremiumResponse {
     private Date agreementDateTo;
     private BigDecimal agreementPrice;
 
-    DateTimeService dateTimeService = new DateTimeService();
-
     public TravelCalculatePremiumResponse() {
     }
 
-    public TravelCalculatePremiumResponse(String personFirstName, String personLastName, Date agreementDateFrom, Date agreementDateTo) {
+    public TravelCalculatePremiumResponse(String personFirstName, String personLastName, Date agreementDateFrom, Date agreementDateTo, BigDecimal agreementPrice) {
         this.personFirstName = personFirstName;
         this.personLastName = personLastName;
         this.agreementDateFrom = agreementDateFrom;
         this.agreementDateTo = agreementDateTo;
-        this.agreementPrice = dateTimeService.calculateAgreementPrice(agreementDateFrom, agreementDateTo);
+        this.agreementPrice = agreementPrice;
     }
 
     public String getPersonFirstName() {
@@ -61,4 +57,7 @@ public class TravelCalculatePremiumResponse {
         this.agreementDateTo = agreementDateTo;
     }
 
+    public void setAgreementPrice(BigDecimal agreementPrice) {
+        this.agreementPrice = agreementPrice;
+    }
 }
