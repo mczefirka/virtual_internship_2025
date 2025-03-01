@@ -1,0 +1,34 @@
+1)          **Task context (brief description) **
+**describe the context and the task in your own words in free form.**
+
+Изучить как работает дизайн паттерн Inversion of Control (IoC).
+Какой способ внедрения зависимостей самый лучший?
+
+
+2)          **What are done and how?(brief description)**
+**describe what you did and how you did it in order to accomplish the task.**
+
+Есть три типа внедрения зависимостей:
+ Constructor-Based Dependency Injection, Setter-Based DI and Field-Based DI.
+Рекомендуется использовать Constructor-Based DI для обязательных зависимостей,
+ а Setter-Based DI для необязательных.
+Field-Based DI использовать не рекомендуется.
+ Потому что он использует больше вычислительных ресурсов
+
+
+3)          **Why was it done? What did you learn from the task?**
+**describe in your own words why it was necessary to perform this task,describe what techniques,**
+**technologies, tools you used to perform the task, what did you learn while performing this task?**
+
+Прочитал статьи на сайте Baeldung
+
+
+4)          **How much time was spent on the task?**
+**record for yourself how long it took you to complete this task. Could it have been done faster?**
+
+1 ч 16 мин
+
+
+5)          **Free-form notes, ideas, suggestions**
+**record any thoughts, emotions, ideas, reflections related to this task.**
+
