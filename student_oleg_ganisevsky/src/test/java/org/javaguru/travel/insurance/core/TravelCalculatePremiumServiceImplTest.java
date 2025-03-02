@@ -1,7 +1,7 @@
 package org.javaguru.travel.insurance.core;
 
 import org.javaguru.travel.insurance.rest.TravelCalculatePremiumRequest;
-import org.javaguru.travel.insurance.rest.TravelCalculatePremiumResponse;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -21,14 +21,24 @@ class TravelCalculatePremiumServiceImplTest {
     @InjectMocks
     private TravelCalculatePremiumServiceImpl service;
 
+    private TravelCalculatePremiumRequest request;
+    BigDecimal agreementPrice = new BigDecimal("2");
+
+    @BeforeEach
+    public void setUp(){
+        request = populateRequest();
+
+        // Define the behaviour of the mock DateTimeService.
+        // Current date minus 2 days and current date. Return 2
+        when(dateTimeService
+                .calculateAgreementPrice(request.getAgreementDateFrom(), request.getAgreementDateTo()))
+                .thenReturn(agreementPrice);
+    }
+
     @Test
     public void givenRequest_whenPopulateResponsePersonFirstNameField_thenReturnResponse() {
-        // Populate request fields
-        TravelCalculatePremiumRequest request = new TravelCalculatePremiumRequest("Sigma",
-                "Male", new Date(), new Date());
-
         // Populate response fields
-        TravelCalculatePremiumResponse response = service.calculatePremium(request);
+        var response = service.calculatePremium(request);
 
         // Check request and response personFirstName fields
         assertEquals(request.getPersonFirstName(), response.getPersonFirstName());
@@ -36,12 +46,8 @@ class TravelCalculatePremiumServiceImplTest {
 
     @Test
     public void givenRequest_whenPopulateResponsePersonLastNameField_thenReturnResponse() {
-        // Populate request fields
-        TravelCalculatePremiumRequest request = new TravelCalculatePremiumRequest("Sigma",
-                "Male", new Date(), new Date());
-
         // Populate response fields
-        TravelCalculatePremiumResponse response = service.calculatePremium(request);
+        var response = service.calculatePremium(request);
 
         // Check request and response personLastName fields
         assertEquals(request.getPersonLastName(), response.getPersonLastName());
@@ -49,12 +55,8 @@ class TravelCalculatePremiumServiceImplTest {
 
     @Test
     public void givenRequest_whenPopulateResponseAgreementDateFromField_thenReturnResponse() {
-        // Populate request fields
-        TravelCalculatePremiumRequest request = new TravelCalculatePremiumRequest("Sigma",
-                "Male", new Date(), new Date());
-
         // Populate response fields
-        TravelCalculatePremiumResponse response = service.calculatePremium(request);
+        var response = service.calculatePremium(request);
 
         // Check request and response agreementDateFrom fields
         assertEquals(request.getAgreementDateFrom(), response.getAgreementDateFrom());
@@ -62,12 +64,8 @@ class TravelCalculatePremiumServiceImplTest {
 
     @Test
     public void givenRequest_whenPopulateResponseAgreementDateToField_thenReturnResponse() {
-        // Populate request fields
-        TravelCalculatePremiumRequest request = new TravelCalculatePremiumRequest("Sigma",
-                "Male", new Date(), new Date());
-
         // Populate response fields
-        TravelCalculatePremiumResponse response = service.calculatePremium(request);
+        var response = service.calculatePremium(request);
 
         // Check request and response agreementDateTo fields
         assertEquals(request.getAgreementDateTo(), response.getAgreementDateTo());
@@ -75,26 +73,22 @@ class TravelCalculatePremiumServiceImplTest {
 
     @Test
     public void givenRequest_whenPopulateResponseAgreementDateFromAndToFields_thenReturnAgreementPrice() {
-        // Mockito
-        // Create current date minus 2 days and current date for request
-        // And BigDecimal agreementPrice for dateTimeService return
-        Date agreementDateFrom = new Date(new Date().getTime() - 2 * 86_400_000L);
-        Date agreementDateTo = new Date();
-        BigDecimal agreementPrice = new BigDecimal("2");
-
-        // Populate request fields
-        var request = new TravelCalculatePremiumRequest("Sigma",
-                "Male", agreementDateFrom, agreementDateTo);
-
-        // Define the behaviour of the mock DateTimeService. Current date minus 2 days and current date. Return 2
-        when(dateTimeService
-                .calculateAgreementPrice(request.getAgreementDateFrom(), request.getAgreementDateTo()))
-                .thenReturn(agreementPrice);
-
-        // Instantiate TravelCalculatePremiumResponse with the TravelCalculatePremiumServiceImpl
-        // and the mock DateTimeService
+        // Populate response fields
         var response = service.calculatePremium(request);
 
         assertEquals(agreementPrice, response.getAgreementPrice());
+    }
+
+    /**Populate request fields. Set "Sigma" for personFirstName field,
+     * "Male" for personLastName,
+     * current date minus 2 days for agreementDateFrom
+     * and current date for agreementDateTo*/
+    private TravelCalculatePremiumRequest populateRequest(){
+        var request = new TravelCalculatePremiumRequest();
+        request.setPersonFirstName("Sigma");
+        request.setPersonLastName("Male");
+        request.setAgreementDateFrom(new Date(new Date().getTime() - 2 * 86_400_000L));
+        request.setAgreementDateTo(new Date());
+        return request;
     }
 }
