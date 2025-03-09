@@ -110,4 +110,21 @@ public class TravelCalculatePremiumRequestValidatorTest {
         // Check whether the validator created an error list. If the list isn't empty, the test passes
         assertFalse(validator.validate(request).isEmpty());
     }
+
+    @Test
+    public void givenRequestWithoutAgreementDateFrom_whenValidateRequest_thenReturnErrors() {
+        // Populate request fields
+        var request = new TravelCalculatePremiumRequest();
+
+        // Request without agreementDateFrom field
+        request.setPersonFirstName("Sigma");
+        request.setPersonLastName("Male");
+//        request.setAgreementDateFrom(new Date(new Date().getTime() - 2 * 86_400_000L));
+        request.setAgreementDateTo(new Date());
+
+        var validator = new TravelCalculatePremiumRequestValidator();
+
+        // Check whether the validator created an error list. If the list isn't empty, the test passes
+        assertFalse(validator.validate(request).isEmpty());
+    }
 }
