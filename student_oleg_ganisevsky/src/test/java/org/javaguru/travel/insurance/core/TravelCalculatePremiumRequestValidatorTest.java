@@ -161,4 +161,38 @@ public class TravelCalculatePremiumRequestValidatorTest {
         // Check whether the validator created an error list. If the list isn't empty, the test passes
         assertFalse(validator.validate(request).isEmpty());
     }
+
+    @Test
+    public void givenRequestWithDateFromIsAfterDateTo_whenValidateRequest_thenReturnErrors() {
+        // Populate request fields
+        var request = new TravelCalculatePremiumRequest();
+
+        request.setPersonFirstName("Sigma");
+        request.setPersonLastName("Male");
+        // The date in agreementDateFrom is after the date in agreementDateTo.
+        request.setAgreementDateFrom(new Date());
+        request.setAgreementDateTo(new Date(new Date().getTime() - 2 * 86_400_000L));
+
+        var validator = new TravelCalculatePremiumRequestValidator();
+
+        // Check whether the validator created an error list. If the list isn't empty, the test passes
+        assertFalse(validator.validate(request).isEmpty());
+    }
+
+    @Test
+    public void givenRequestWithDateFromIsEqualDateTo_whenValidateRequest_thenReturnErrors() {
+        // Populate request fields
+        var request = new TravelCalculatePremiumRequest();
+
+        request.setPersonFirstName("Sigma");
+        request.setPersonLastName("Male");
+        // The date in agreementDateFrom is equal the date in agreementDateTo.
+        request.setAgreementDateFrom(new Date());
+        request.setAgreementDateTo(new Date());
+
+        var validator = new TravelCalculatePremiumRequestValidator();
+
+        // Check whether the validator created an error list. If the list isn't empty, the test passes
+        assertFalse(validator.validate(request).isEmpty());
+    }
 }
