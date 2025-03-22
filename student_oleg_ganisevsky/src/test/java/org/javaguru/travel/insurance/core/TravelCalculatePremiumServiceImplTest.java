@@ -10,6 +10,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.when;
@@ -18,6 +19,7 @@ import static org.mockito.Mockito.when;
 class TravelCalculatePremiumServiceImplTest {
 
     @Mock private DateTimeService dateTimeService;
+    @Mock private TravelCalculatePremiumRequestValidator requestValidator;
     @InjectMocks
     private TravelCalculatePremiumServiceImpl service;
 
@@ -33,6 +35,9 @@ class TravelCalculatePremiumServiceImplTest {
         when(dateTimeService
                 .calculateAgreementPrice(request.getAgreementDateFrom(), request.getAgreementDateTo()))
                 .thenReturn(agreementPrice);
+        // Define the behaviour of the mock TravelCalculatePremiumRequestValidator.
+        // Return list without elements. This means that we don't have validation errors.
+        when(requestValidator.validate(request)).thenReturn(List.of());
     }
 
     @Test
