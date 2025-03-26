@@ -1,0 +1,44 @@
+1)          **Task context (brief description) **
+**describe the context and the task in your own words in free form.**
+
+"Ментор указал вам на то, что код TravelCalculatePremiumServiceImpl
+не отражает сути бизнес процесса, который описан выше.
+
+В нём нет чёткого акцента на место в коде, где бы
+происходил расчёт стоимости страхового полиса (underwriting).
+На данный момент это происходит где-то во время создания ответа.
+
+А ведь underwriting (расчет страховой премии) и есть главная вещь,
+ради которой мы создаем это приложение!
+
+Попробуйте переделать код так, чтобы удовлетворить
+пожелание ментора и приблизить ваш код к реальному
+бизнес процессу, который он автоматизирует.
+PS: при изменении кода не забудьте про тесты."
+
+
+2)          **What are done and how?(brief description)**
+**describe what you did and how you did it in order to accomplish the task.**
+
+Вынес вызов метода calculateAgreementPrice из класса DateTimeService в отдельный класс TravelPremiumUnderwriting.
+Написал дополнительный тест на проверку того что TravelCalculatePremiumServiceImplTest возвращает response с ошибкой
+    если валидатор TravelCalculatePremiumRequestValidator возвращает список ошибок.
+Написал тест для класса TravelPremiumUnderwriting.
+
+
+3)          **Why was it done? What did you learn from the task?**
+**describe in your own words why it was necessary to perform this task,describe what techniques,**
+**technologies, tools you used to perform the task, what did you learn while performing this task?**
+
+Это сделано чтобы мой код был приближен бизнес процессу.
+
+
+4)          **How much time was spent on the task?**
+**record for yourself how long it took you to complete this task. Could it have been done faster?**
+
+3 ч 02 мин.
+
+
+5)          **Free-form notes, ideas, suggestions**
+**record any thoughts, emotions, ideas, reflections related to this task.**
+

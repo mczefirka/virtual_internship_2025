@@ -11,8 +11,8 @@ public class DateTimeServiceTest {
     DateTimeService dateTimeService = new DateTimeService();
 
     @Test
-    public void givenRequest_whenPopulateResponseAgreementDateInDateTimeServiceClass_thenReturnAgreementPrice() {
-        // Check calculateAgreementPrice method from DateTimeService class
+    public void givenRequest_whenCalculateAgreementPrice_thenReturnAgreementPrice() {
+        // Check calculateAgreementPrice method in DateTimeService class
         assertEquals(new BigDecimal("2"),
                 dateTimeService.calculateAgreementPrice(new Date(new Date().getTime() - 2 * 86_400_000L),
                         new Date()));

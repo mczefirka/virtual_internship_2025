@@ -7,19 +7,20 @@ import org.javaguru.travel.insurance.dto.TravelCalculatePremiumResponse;
 import org.javaguru.travel.insurance.dto.ValidationError;
 import org.springframework.stereotype.Component;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 @RequiredArgsConstructor(access = AccessLevel.PACKAGE)
 @Component
 class TravelCalculatePremiumServiceImpl implements TravelCalculatePremiumService {
     private final TravelCalculatePremiumRequestValidator requestValidator;
-    private final DateTimeService dateTimeService;
+    private final TravelPremiumUnderwriting premiumUnderwriting;
 
     @Override
     public TravelCalculatePremiumResponse calculatePremium(TravelCalculatePremiumRequest request) {
         List<ValidationError> errors = requestValidator.validate(request);
         return errors.isEmpty()
-                ? buildResponse(request)
+                ? buildResponse(request, premiumUnderwriting.calculatePremium(request))
                 : buildResponse(errors);
     }
 
@@ -27,16 +28,15 @@ class TravelCalculatePremiumServiceImpl implements TravelCalculatePremiumService
         return new TravelCalculatePremiumResponse(errors);
     }
 
-    private TravelCalculatePremiumResponse buildResponse(TravelCalculatePremiumRequest request) {
+    private TravelCalculatePremiumResponse buildResponse(TravelCalculatePremiumRequest request, BigDecimal premium) {
         //Populate response fields from request
         var response = new TravelCalculatePremiumResponse();
+
         response.setPersonFirstName(request.getPersonFirstName());
         response.setPersonLastName(request.getPersonLastName());
         response.setAgreementDateFrom(request.getAgreementDateFrom());
         response.setAgreementDateTo(request.getAgreementDateTo());
-
-        response.setAgreementPrice(dateTimeService
-                .calculateAgreementPrice(request.getAgreementDateFrom(), request.getAgreementDateTo()));
+        response.setAgreementPrice(premium);
 
         return response;
     }
