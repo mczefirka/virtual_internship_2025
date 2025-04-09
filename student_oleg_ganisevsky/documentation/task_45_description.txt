@@ -1,0 +1,30 @@
+1)          **Task context (brief description) **
+**describe the context and the task in your own words in free form.**
+
+Изучить как работает тест контроллера TravelCalculatePremiumControllerTest.
+
+
+2)          **What are done and how?(brief description)**
+**describe what you did and how you did it in order to accomplish the task.**
+
+Сначала прочитал документацию неизвестных мне методов и классов MockMvc, .perform(), post(), .content(), .andExpect().
+Потом попросил у ChatGPT объяснить код.
+
+
+3)          **Why was it done? What did you learn from the task?**
+**describe in your own words why it was necessary to perform this task,describe what techniques,**
+**technologies, tools you used to perform the task, what did you learn while performing this task?**
+
+Благодаря MockMvc мы можем протестировать как наш контроллер будет обрабатывать запросы.
+Он имитирует HTTP запросы и позволяет проверять ответы контроллера.
+
+
+4)          **How much time was spent on the task?**
+**record for yourself how long it took you to complete this task. Could it have been done faster?**
+
+1 ч.
+
+
+5)          **Free-form notes, ideas, suggestions**
+**record any thoughts, emotions, ideas, reflections related to this task.**
+
