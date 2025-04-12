@@ -206,4 +206,27 @@
              "agreementPrice": null
          }
 
+   ##### Дано: дата agreementDateFrom равна дате agreementDateTo.
+         Ожидаем: в ответе ошибка agreementDateFrom = agreementDateTo.
+         Request:
+         {
+             "personFirstName": "I AM",
+             "personLastName": "MUSIC",
+             "agreementDateFrom": "2025-03-15",
+             "agreementDateTo": "2025-03-15"
+         }
 
+         Response:
+         {
+             "errors": [
+                 {
+                     "field": "agreementDateFrom",
+                     "message": "agreementDateFrom must be before agreementDateTo!"
+                 }
+             ],
+             "personFirstName": null,
+             "personLastName": null,
+             "agreementDateFrom": null,
+             "agreementDateTo": null,
+             "agreementPrice": null
+         }
