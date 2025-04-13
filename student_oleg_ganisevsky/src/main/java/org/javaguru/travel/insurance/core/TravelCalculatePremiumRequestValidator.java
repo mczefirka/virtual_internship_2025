@@ -53,11 +53,11 @@ class TravelCalculatePremiumRequestValidator {
         Date agreementDateTo = request.getAgreementDateTo();
 
         if (agreementDateFrom == null) {
-            return Optional.of(new ValidationError("agreementDateFrom","Must not be empty!"));
+            return Optional.empty();
         }
 
         if (agreementDateTo == null) {
-            return Optional.of(new ValidationError("agreementDateTo","Must not be empty!"));
+            return Optional.empty();
         }
 
         try {
