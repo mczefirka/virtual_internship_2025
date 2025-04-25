@@ -22,11 +22,10 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 public class TravelCalculatePremiumControllerTest {
 
     @Autowired private MockMvc mockMvc;
+    @Autowired private JsonFileReader fileReader;
 
     @Test
     public void givenRequest_whenRestControllerIsCalled_thenDoNotExpectErrors() throws Exception {
-        JsonFileReader fileReader = new JsonFileReader();
-
         mockMvc.perform(post("/insurance/travel/")
                         .content(fileReader.readJsonFromFile("src/test/resources/rest/TravelCalculatePremiumRequest_success.json"))
                         .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE))
@@ -41,8 +40,6 @@ public class TravelCalculatePremiumControllerTest {
 
     @Test
     public void givenRequestWithoutFirstName_whenRestControllerIsCalled_thenExpectErrors() throws Exception {
-        JsonFileReader fileReader = new JsonFileReader();
-
         mockMvc.perform(post("/insurance/travel/")
                         .content(fileReader.readJsonFromFile("src/test/resources/rest/TravelCalculatePremiumRequest_firstName_not_provided.json"))
                         .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE))
@@ -57,8 +54,6 @@ public class TravelCalculatePremiumControllerTest {
 
     @Test
     public void givenRequestWithoutLastName_whenRestControllerIsCalled_thenExpectErrors() throws Exception {
-        JsonFileReader fileReader = new JsonFileReader();
-
         mockMvc.perform(post("/insurance/travel/")
                         .content(fileReader.readJsonFromFile("src/test/resources/rest/TravelCalculatePremiumRequest_lastName_not_provided.json"))
                         .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE))
@@ -73,8 +68,6 @@ public class TravelCalculatePremiumControllerTest {
 
     @Test
     public void givenRequestWithoutDateFrom_whenRestControllerIsCalled_thenExpectErrors() throws Exception {
-        JsonFileReader fileReader = new JsonFileReader();
-
         mockMvc.perform(post("/insurance/travel/")
                         .content(fileReader.readJsonFromFile("src/test/resources/rest/TravelCalculatePremiumRequest_agreementDateFrom_not_provided.json"))
                         .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE))
@@ -89,8 +82,6 @@ public class TravelCalculatePremiumControllerTest {
 
     @Test
     public void givenRequestWithoutDateTo_whenRestControllerIsCalled_thenExpectErrors() throws Exception {
-        JsonFileReader fileReader = new JsonFileReader();
-
         mockMvc.perform(post("/insurance/travel/")
                         .content(fileReader.readJsonFromFile("src/test/resources/rest/TravelCalculatePremiumRequest_agreementDateTo_not_provided.json"))
                         .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE))
@@ -105,8 +96,6 @@ public class TravelCalculatePremiumControllerTest {
 
     @Test
     public void givenRequestWithoutFields_whenRestControllerIsCalled_thenExpectErrors() throws Exception {
-        JsonFileReader fileReader = new JsonFileReader();
-
         mockMvc.perform(post("/insurance/travel/")
                         .content(fileReader.readJsonFromFile("src/test/resources/rest/TravelCalculatePremiumRequest_allFields_not_provided.json"))
                         .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE))
@@ -121,8 +110,6 @@ public class TravelCalculatePremiumControllerTest {
 
     @Test
     public void givenRequestWithDateFromIsAfterDateTo_whenRestControllerIsCalled_thenExpectErrors() throws Exception {
-        JsonFileReader fileReader = new JsonFileReader();
-
         mockMvc.perform(post("/insurance/travel/")
                         .content(fileReader.readJsonFromFile("src/test/resources/rest/TravelCalculatePremiumRequest_dateFrom_is_after_dateTo.json"))
                         .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE))
@@ -137,8 +124,6 @@ public class TravelCalculatePremiumControllerTest {
 
     @Test
     public void givenRequestWithDateFromIsEqualDateTo_whenRestControllerIsCalled_thenExpectErrors() throws Exception {
-        JsonFileReader fileReader = new JsonFileReader();
-
         mockMvc.perform(post("/insurance/travel/")
                         .content(fileReader.readJsonFromFile("src/test/resources/rest/TravelCalculatePremiumRequest_dateFrom_is_equal_dateTo.json"))
                         .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE))
