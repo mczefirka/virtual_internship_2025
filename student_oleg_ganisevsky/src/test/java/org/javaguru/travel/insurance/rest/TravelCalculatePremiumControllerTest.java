@@ -10,11 +10,8 @@ import org.springframework.http.MediaType;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 
-import static org.hamcrest.Matchers.is;
-import static org.hamcrest.Matchers.nullValue;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
@@ -26,113 +23,98 @@ public class TravelCalculatePremiumControllerTest {
 
     @Test
     public void givenRequest_whenRestControllerIsCalled_thenDoNotExpectErrors() throws Exception {
+        String expectedJson = fileReader.readJsonFromFile("src/test/resources/rest/TravelCalculatePremiumResponse_success.json");
+
+        // Compare controller response with expected response
         mockMvc.perform(post("/insurance/travel/")
                         .content(fileReader.readJsonFromFile("src/test/resources/rest/TravelCalculatePremiumRequest_success.json"))
                         .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("personFirstName", is("I AM")))
-                .andExpect(jsonPath("personLastName", is("MUSIC")))
-                .andExpect(jsonPath("agreementDateFrom", is("2025-03-15")))
-                .andExpect(jsonPath("agreementDateTo", is("2025-04-13")))
-                .andExpect(jsonPath("agreementPrice", is(29)))
+                .andExpect(content().json(expectedJson))
                 .andReturn();
     }
 
     @Test
     public void givenRequestWithoutFirstName_whenRestControllerIsCalled_thenExpectErrors() throws Exception {
+        String expectedJson = fileReader.readJsonFromFile("src/test/resources/rest/TravelCalculatePremiumResponse_firstName_not_provided.json");
+
         mockMvc.perform(post("/insurance/travel/")
                         .content(fileReader.readJsonFromFile("src/test/resources/rest/TravelCalculatePremiumRequest_firstName_not_provided.json"))
                         .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("personFirstName", is(nullValue())))
-                .andExpect(jsonPath("personLastName", is(nullValue())))
-                .andExpect(jsonPath("agreementDateFrom", is(nullValue())))
-                .andExpect(jsonPath("agreementDateTo", is(nullValue())))
-                .andExpect(jsonPath("agreementPrice", is(nullValue())))
+                .andExpect(content().json(expectedJson))
                 .andReturn();
     }
 
     @Test
     public void givenRequestWithoutLastName_whenRestControllerIsCalled_thenExpectErrors() throws Exception {
+        String expectedJson = fileReader.readJsonFromFile("src/test/resources/rest/TravelCalculatePremiumResponse_lastName_not_provided.json");
+
         mockMvc.perform(post("/insurance/travel/")
                         .content(fileReader.readJsonFromFile("src/test/resources/rest/TravelCalculatePremiumRequest_lastName_not_provided.json"))
                         .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("personFirstName", is(nullValue())))
-                .andExpect(jsonPath("personLastName", is(nullValue())))
-                .andExpect(jsonPath("agreementDateFrom", is(nullValue())))
-                .andExpect(jsonPath("agreementDateTo", is(nullValue())))
-                .andExpect(jsonPath("agreementPrice", is(nullValue())))
+                .andExpect(content().json(expectedJson))
                 .andReturn();
     }
 
     @Test
     public void givenRequestWithoutDateFrom_whenRestControllerIsCalled_thenExpectErrors() throws Exception {
+        String expectedJson = fileReader.readJsonFromFile("src/test/resources/rest/TravelCalculatePremiumResponse_agreementDateFrom_not_provided.json");
+
         mockMvc.perform(post("/insurance/travel/")
                         .content(fileReader.readJsonFromFile("src/test/resources/rest/TravelCalculatePremiumRequest_agreementDateFrom_not_provided.json"))
                         .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("personFirstName", is(nullValue())))
-                .andExpect(jsonPath("personLastName", is(nullValue())))
-                .andExpect(jsonPath("agreementDateFrom", is(nullValue())))
-                .andExpect(jsonPath("agreementDateTo", is(nullValue())))
-                .andExpect(jsonPath("agreementPrice", is(nullValue())))
+                .andExpect(content().json(expectedJson))
                 .andReturn();
     }
 
     @Test
     public void givenRequestWithoutDateTo_whenRestControllerIsCalled_thenExpectErrors() throws Exception {
+        String expectedJson = fileReader.readJsonFromFile("src/test/resources/rest/TravelCalculatePremiumResponse_agreementDateTo_not_provided.json");
+
         mockMvc.perform(post("/insurance/travel/")
                         .content(fileReader.readJsonFromFile("src/test/resources/rest/TravelCalculatePremiumRequest_agreementDateTo_not_provided.json"))
                         .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("personFirstName", is(nullValue())))
-                .andExpect(jsonPath("personLastName", is(nullValue())))
-                .andExpect(jsonPath("agreementDateFrom", is(nullValue())))
-                .andExpect(jsonPath("agreementDateTo", is(nullValue())))
-                .andExpect(jsonPath("agreementPrice", is(nullValue())))
+                .andExpect(content().json(expectedJson))
                 .andReturn();
     }
 
     @Test
     public void givenRequestWithoutFields_whenRestControllerIsCalled_thenExpectErrors() throws Exception {
+        String expectedJson = fileReader.readJsonFromFile("src/test/resources/rest/TravelCalculatePremiumResponse_allFields_not_provided.json");
+
         mockMvc.perform(post("/insurance/travel/")
                         .content(fileReader.readJsonFromFile("src/test/resources/rest/TravelCalculatePremiumRequest_allFields_not_provided.json"))
                         .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("personFirstName", is(nullValue())))
-                .andExpect(jsonPath("personLastName", is(nullValue())))
-                .andExpect(jsonPath("agreementDateFrom", is(nullValue())))
-                .andExpect(jsonPath("agreementDateTo", is(nullValue())))
-                .andExpect(jsonPath("agreementPrice", is(nullValue())))
+                .andExpect(content().json(expectedJson))
                 .andReturn();
     }
 
     @Test
     public void givenRequestWithDateFromIsAfterDateTo_whenRestControllerIsCalled_thenExpectErrors() throws Exception {
+        String expectedJson = fileReader.readJsonFromFile("src/test/resources/rest/TravelCalculatePremiumResponse_dateFrom_is_after_dateTo.json");
+
         mockMvc.perform(post("/insurance/travel/")
                         .content(fileReader.readJsonFromFile("src/test/resources/rest/TravelCalculatePremiumRequest_dateFrom_is_after_dateTo.json"))
                         .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("personFirstName", is(nullValue())))
-                .andExpect(jsonPath("personLastName", is(nullValue())))
-                .andExpect(jsonPath("agreementDateFrom", is(nullValue())))
-                .andExpect(jsonPath("agreementDateTo", is(nullValue())))
-                .andExpect(jsonPath("agreementPrice", is(nullValue())))
+                .andExpect(content().json(expectedJson))
                 .andReturn();
     }
 
     @Test
     public void givenRequestWithDateFromIsEqualDateTo_whenRestControllerIsCalled_thenExpectErrors() throws Exception {
+        String expectedJson = fileReader.readJsonFromFile("src/test/resources/rest/TravelCalculatePremiumResponse_dateFrom_is_equal_dateTo.json");
+
         mockMvc.perform(post("/insurance/travel/")
                         .content(fileReader.readJsonFromFile("src/test/resources/rest/TravelCalculatePremiumRequest_dateFrom_is_equal_dateTo.json"))
                         .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("personFirstName", is(nullValue())))
-                .andExpect(jsonPath("personLastName", is(nullValue())))
-                .andExpect(jsonPath("agreementDateFrom", is(nullValue())))
-                .andExpect(jsonPath("agreementDateTo", is(nullValue())))
-                .andExpect(jsonPath("agreementPrice", is(nullValue())))
+                .andExpect(content().json(expectedJson))
                 .andReturn();
     }
 
